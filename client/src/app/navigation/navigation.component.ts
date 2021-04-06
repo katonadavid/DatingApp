@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginCredentials, User } from '../_models/User';
 import { AccountService } from '../_services/account.service';
 
@@ -17,7 +19,7 @@ export class NavigationComponent implements OnInit {
 
   loggedIn: boolean = false;
 
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getCurrentUser();
@@ -27,14 +29,17 @@ export class NavigationComponent implements OnInit {
     this.accountService.login(this.credentials).subscribe( response => {
       console.log( response );
       this.loggedIn = true;
+      this.router.navigate(['members']);
     }, error => {
       console.log( error );
+      this.toastr.error( error.error );
     });
   }
 
   logout() {
     this.loggedIn = false;
     this.accountService.logout();
+    this.router.navigate(['/']);
   }
 
   getCurrentUser() {

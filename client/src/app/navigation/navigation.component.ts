@@ -30,9 +30,6 @@ export class NavigationComponent implements OnInit {
       console.log( response );
       this.loggedIn = true;
       this.router.navigate(['members']);
-    }, error => {
-      console.log( error );
-      this.toastr.error( error.error );
     });
   }
 

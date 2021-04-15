@@ -15,6 +15,7 @@ namespace Helpers
                 // For the age member of destination object, take the source objects' DateOfBirth property's calculateage methods result
                 .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
             CreateMap<Photo, PhotoDTO>();
+            CreateMap<MemberUpdateDTO, AppUser>();
         }
     }
 }
